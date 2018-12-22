@@ -12,7 +12,6 @@ __all__ = [
     'vertical_from_zmax_from_data'
 ]
 
-vertical ()
 def vertical_from_zmax_from_data(formdata, zmax, kmax=100): # *args, **kwargs
     form = FormDiagram.from_data(formdata)
     scale = vertical_from_zmax(form, zmax, kmax)
