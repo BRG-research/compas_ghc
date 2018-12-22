@@ -13,3 +13,9 @@ class StructuralDesign:
 	def SetForceDiagram(self, forceDiag):
 		self.forceDiag 		= forceDiag
 	
+	def SetDualDiagrams(self, formDiag, forceDiag):
+		self.SetFormDiagram(formDiag)
+		self.SetForceDiagram(forceDiag)
+
+	def OutputDualDiagrams(self):
+		return self.formDiag, self.forceDiag;
