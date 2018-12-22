@@ -6,13 +6,18 @@ from compas_tna.equilibrium import horizontal_nodal_rhino
 from compas_tna.equilibrium import vertical_from_zmax_rhino
 
 def test():
+	print ("hello world")
 	pass
-# def horizontal_nodal_rhino(form, force, *args, **kwargs):
-#     import compas_rhino
-#     def callback(line, args):
-#         print(line)
-#         compas_rhino.wait()
-#     f = XFunc('compas_tna.equilibrium.horizontal_nodal_xfunc', tmpdir=compas_tna.TEMP, callback=callback)
-#     formdata, forcedata = f(form.to_data(), force.to_data(), *args, **kwargs)
-#     form.data = formdata
-#     force.data = forcedata
+
+def horizontal_nodal_rpc (formdata, forcedata, alpha = 100, kmax = 100, *args, **kwargs):
+    import compas_rhino
+    def callback(line, args):
+        print(line)
+        compas_rhino.wait()
+
+    form = FormDiagram.from_data(formdata)
+    force = ForceDiagram.from_data(formdata)
+    horizontal_nodal (form, force, alpha, kmax)
+    # f = XFunc('compas_tna.equilibrium.horizontal_nodal_xfunc', tmpdir=compas_tna.TEMP, callback=callback)
+    formdata, forcedata = form.to_data(), force.to_data()
+    return formdata, forcedata
