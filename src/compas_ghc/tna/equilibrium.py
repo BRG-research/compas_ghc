@@ -1,12 +1,19 @@
 
 
+
 from compas_tna.diagrams import FormDiagram
 from compas_tna.diagrams import ForceDiagram
 from compas_tna.equilibrium import horizontal_nodal_rhino 
 from compas_tna.equilibrium import vertical_from_zmax_rhino
 
-def test():
+__all__ = [
+    'test_func',
+    'horizontal_nodal_rpc',
+]
+
+def test_func():
 	print ("hello world")
+	return str("hello world")
 	pass
 
 def horizontal_nodal_rpc (formdata, forcedata, alpha = 100, kmax = 100, *args, **kwargs):
