@@ -1,6 +1,9 @@
 __all__ = [
-    'StructuralDesign'
+    'StructuralDesign',
+    'StructuralLoads',
 ]
+
+
 
 class StructuralDesign:
 	def __init__(self):
@@ -19,3 +22,9 @@ class StructuralDesign:
 
 	def OutputDualDiagrams(self):
 		return self.formDiag, self.forceDiag;
+
+class StructuralLoad:
+	def __init__(self, coords_LdPos = None, vec_LdDirMag=None):
+		self.coords_LdPos		= coords_LdPos
+		self.i_LdPosDiagVKey	= None
+		self.vec_LdDirMag		= vec_LdDirMag
