@@ -4,7 +4,6 @@ __all__ = [
 ]
 
 
-
 class StructuralDesign:
 	def __init__(self):
 		self.formDiag 		= None
@@ -25,6 +24,6 @@ class StructuralDesign:
 
 class StructuralLoad:
 	def __init__(self, coords_LdPos = None, vec_LdDirMag=None):
-		self.coords_LdPos		= coords_LdPos
-		self.i_LdPosDiagVKey	= None
-		self.vec_LdDirMag		= vec_LdDirMag
+		self.coords			= coords_LdPos
+		# self.i_LdPosFDiagVKey	= None
+		self.vec 			= vec_LdDirMag
