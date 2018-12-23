@@ -33,4 +33,4 @@ def horizontal_nodal_from_data (formdata, forcedata, alpha = 100, kmax = 100): #
     # f = XFunc('compas_tna.equilibrium.horizontal_nodal_xfunc', tmpdir=compas_tna.TEMP, callback=callback)
     formdata, forcedata = form.to_data(), force.to_data()
     codeTm.Mark('diagram to data')
-    return formdata, forcedata, codeTm.OutputLogData()
+    return formdata, forcedata
