@@ -7,6 +7,19 @@ def GrasshopperInputsGate(inp, str_TypName):
 			return True
 	return False
 
+def IsCompasDataStructure(inp, strsL_AddtlTypsNms=None):
+	strsL_DfltTypsNms = ['FormDiagram','ForceDiagram','Network','Mesh']
+	if strsL_AddtlTypsNms is not None and isinstance(strsL_AddtlTypsNms,list):
+		strsL_DfltTypsNms.extend(strsL_AddtlTypsNms)
+	_bool_IsCpDtaStruct = False
+	for _str_TypNm in strsL_DfltTypsNms:
+		_bool_IsCpDtaStruct = _bool_IsCpDtaStruct or _str_TypNm == inp.__class__.__name__
+		if _bool_IsCpDtaStruct==True:
+			break
+	return _bool_IsCpDtaStruct
+
+
+
 def SetDefaultInput (dta_Inp, dta_DfltVal, bool_LstOtp = False):
 	_dta_Inp = dta_Inp
 	if _dta_Inp is None:
