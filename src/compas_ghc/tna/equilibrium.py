@@ -1,6 +1,3 @@
-
-from_guid()
-
 from compas_tna.diagrams import FormDiagram
 from compas_tna.diagrams import ForceDiagram
 from compas_tna.equilibrium import horizontal_nodal

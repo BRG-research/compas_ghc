@@ -1,10 +1,11 @@
-
+from copy import deepcopy
 #consider lists of requirements
 #consider list of objects in each category
 def GrasshopperInputsGate(inp, str_TypName):
 	if inp is not None:
 		if inp.__class__.__name__ == str_TypName:
 			return True
+
 	return False
 
 def IsCompasDataStructure(inp, strsL_AddtlTypsNms=None):
@@ -29,6 +30,7 @@ def SetDefaultInput (dta_Inp, dta_DfltVal, bool_LstOtp = False):
 
 	if bool_LstOtp:
 		_dta_Inp = [_dta_Inp] if isinstance(_dta_Inp, list) == False else _dta_Inp
+
 	return _dta_Inp
 
 
