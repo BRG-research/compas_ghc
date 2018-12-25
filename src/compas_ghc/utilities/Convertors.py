@@ -49,3 +49,4 @@ def DrawDisassembledCompasDataStructures(_dct_DiasmdDta):
 
 	return _rgPtsL_Vertices, _rgLnsL_Edges, _rgPtsL_Anchs, _rgPtsL_LddVertices, _rgVecsL_VerticesLds;
 	# draw_mesh(quad_mesh_datastructure, group = False)
+
