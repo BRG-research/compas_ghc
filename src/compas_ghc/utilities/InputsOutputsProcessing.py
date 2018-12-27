@@ -9,7 +9,13 @@ def GrasshopperInputsGate(inp, str_TypName):
 	return False
 
 def IsCompasDataStructure(inp, strsL_AddtlTypsNms=None):
-	strsL_DfltTypsNms = ['FormDiagram','ForceDiagram','Network','Mesh']
+	strsL_DfltTypsNms = [	'FormDiagram',
+							'ForceDiagram',
+							'Network',
+							'Mesh',
+							'CGHDiagram',
+							'CGHFormDiagram',
+							'CGHForceDiagram',]
 	if strsL_AddtlTypsNms is not None and isinstance(strsL_AddtlTypsNms,list):
 		strsL_DfltTypsNms.extend(strsL_AddtlTypsNms)
 	_bool_IsCpDtaStruct = False

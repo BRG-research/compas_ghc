@@ -7,17 +7,17 @@ from compas_tna.equilibrium import vertical_from_zmax
 # from compas_tna.equilibrium import vertical_from_zmax_rhino
 
 __all__ = [
-    'horizontal_nodal_from_data',
-    'vertical_from_zmax_from_data'
+    'HorizontalEquilibrium_fromData',
+    'VerticalEquilibrium_fromZMax_fromData'
 ]
 
-def vertical_from_zmax_from_data(formdata, zmax, kmax=100): # *args, **kwargs
+def VerticalEquilibrium_fromZMax_fromData (formdata, zmax, kmax=100): # *args, **kwargs
     form = FormDiagram.from_data(formdata)
     scale = vertical_from_zmax(form, zmax, kmax)
     return form.to_data(), scale
 
 
-def horizontal_nodal_from_data (formdata, forcedata, alpha = 100, kmax = 100): # *args, **kwargs
+def HorizontalEquilibrium_fromData (formdata, forcedata, alpha = 100, kmax = 100): # *args, **kwargs
 
     # codeTm = CodeTimer()
     # codeTm.Mark('rpc function called')
