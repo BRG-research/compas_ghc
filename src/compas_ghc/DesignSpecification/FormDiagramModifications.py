@@ -1,4 +1,4 @@
-from compas_ghc.utilities.InputsOutputsProcessing import MatchListsLengths as MatchLstLgths
+from compas_ghc.Utilities.InputsOutputsProcessing import MatchListsLengths as MatchLstLgths
 
 def ImplementElementsModifications (formDiag, instsElemsAttrsModL):
 

@@ -15,7 +15,7 @@ def NestedListToGrasshopperDataTree (nstdDtaLst, path_Init = None):
                 _dtaTr.MergeTree(_UnpackList(_dtaElem, _path.AppendElement(0)))
             else:
                 _dtaTr.Add(_dtaElem, _path)
-            _path = _path.Increment(-1) #+1 would increment one-level up instead
+        _path = _path.Increment(-1) #+1 would increment one-level up instead
         return _dtaTr;
         
     return _UnpackList (nstdDtaLst, path_Init);

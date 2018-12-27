@@ -4,7 +4,7 @@ __all__ = [
 ]
 
 
-class StructuralDesign:
+class CGHStructuralDesign:
 	def __init__(self):
 		self.formDiag 		= None
 		self.forceDiag 	 	= None
@@ -22,8 +22,3 @@ class StructuralDesign:
 	def OutputDualDiagrams(self):
 		return self.formDiag, self.forceDiag;
 
-class StructuralLoad:
-	def __init__(self, coords_LdPos = None, vec_LdDirMag=None):
-		self.coords			= coords_LdPos
-		# self.i_LdPosFDiagVKey	= None
-		self.vec 			= vec_LdDirMag
