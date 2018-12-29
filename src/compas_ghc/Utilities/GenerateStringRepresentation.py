@@ -48,13 +48,27 @@ def GenerateStringRepresentation(CGHObj, dct_AddtlInfo = None, str_TitPfx = str_
 	_str_Otp		= _str_Tit + _str_AttrsDisp
 	return _str_Otp;
 
+def FormatFloatsList (dtaL, n_Decml=3):
+	str_FmtdL = 	'['
+	for _v in dtaL:
+		str_FmtdL += ' {_v:.{_n_Decml}f} ,'.format(_v=_v, _n_Decml=n_Decml)
+	str_FmtdL = 	str_FmtdL[0:-1]
+	str_FmtdL += 	']'
+	return str_FmtdL
+
+
 if __name__ == "__main__":
-	class testDataStructureWithLongFancyName ():
-		def __init__(self):
-			pass
+	dtaL = [1.293551,2.596839,3.5938434]
+	strL = FormatFloatsList(dtaL)
+	print (strL)
 
-	testObj = testDataStructureWithLongFancyName()
-	testAttrs = {'a': int(123), 'b':'hello'}
 
-	print (GenerateStringRepresentation(testObj, testAttrs))
+	# class testDataStructureWithLongFancyName ():
+	# 	def __init__(self):
+	# 		pass
+
+	# testObj = testDataStructureWithLongFancyName()
+	# testAttrs = {'a': int(123), 'b':'hello'}
+
+	# print (GenerateStringRepresentation(testObj, testAttrs))
 
