@@ -9,6 +9,16 @@ class CGHStructuralLoad(CGHTypesBase):
         self.coords         = coords_LdPos
         # self.i_LdPosFDiagVKey = None
         self.vec            = vec_LdDirMag
+        self.bool_GblLd		= True if self.coords is None else False
+
+    def IsGlobalLoad(self):
+    	return self.bool_GblLd;
+
+    def CompileToStringSummary(self):
+        _msg    = 'Local Point Load' if not self.IsGlobalLoad() else 'Global Area Load'
+        _smry   = {'Type ': _msg}
+        return _smry
 
     def ToString(self):
-        return self._ToString()
+        return self._ToString();
+

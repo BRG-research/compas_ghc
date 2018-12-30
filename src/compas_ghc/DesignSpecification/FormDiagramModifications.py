@@ -15,9 +15,7 @@ def ImplementElementsModifications (formDiag, instsElemsAttrsModL):
 		_keysL_ElemsToMod 		= _instsElemsAttrsMod.keysL_Elems
 
 		if len(_keysL_ElemsToMod) == 0:
-			print ('no element keys provided')
 			_keysL_ElemsToMod	= _keysL_AllDiagElems
-			print _keysL_AllDiagElems
 
 		_dtaL_AttrVals 	= _instsElemsAttrsMod.dtaL_AttrVals 
 		_dtaL_AttrVals 	= MatchLstLgths(_keysL_ElemsToMod, _dtaL_AttrVals)

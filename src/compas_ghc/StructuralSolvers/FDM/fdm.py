@@ -1,6 +1,14 @@
+try: 
+    from compas.numerical import fd_numpy
+    from numpy import array
+    from numpy import float64
+    from copy import deepcopy
+except:
+    pass
+    
+from compas_tna.utilities import LoadUpdater
 from compas_tna.diagrams import FormDiagram
-from compas.numerical import fd_numpy
-from copy import deepcopy
+
 
 def CompileForceDensitySolverInputs (formDiag):
     _formDiag = formDiag
@@ -12,34 +20,6 @@ def CompileForceDensitySolverInputs (formDiag):
     _fltsL_Q            = _formDiag.get_edges_attribute('q', 1.0)
 
     return _coordsL_Vertices, _eKeysL_Edges, _vKeysL_Anchs, _fltsL_Q
-
-def CompileForceDensityLoads(formDiag, flt_TtlSWLd, bool_LdsRdistrByTrib = True):
-    _formDiag = formDiag
-
-    _vecsL_SWLds        = CalculateSelfWeightLoads(_formDiag, flt_TtlSWLd, bool_LdsRdistrByTrib)
-    _vecsL_PtLds        = _formDiag.get_vertices_attributes(('px', 'py', 'pz'), (0.0, 0.0, -1.0))   
-    _vecsL_TtlLds       = [[_vec_SWLd[_ax] + _vec_PtLd[_ax] for _ax in range (0,3)] for _vec_SWLd, _vec_PtLd in zip(_vecsL_SWLds, _vecsL_PtLds)]
-    return _vecsL_TtlLds;
-
-def CalculateSelfWeightLoads (formDiag, flt_TtlSWLd, bool_LdsRdistrByTrib = True):
-    _formDiag       = formDiag
-    _flt_TtlSWLd    = flt_TtlSWLd
-    _vecsL_SWLds    = []
-
-    if bool_LdsRdistrByTrib == False:
-        _len_Vertices       = len(_formDiag.vertex.keys())
-        _flt_SWLd           = _flt_TtlSWLd/_len_Vertices
-        _vecsL_SWLds        = [[0,0,_flt_SWLd * 1] for _i in range(0, _len_Vertices)]
-    else:
-        _fltsL_VertexArs    = []
-        [_fltsL_VertexArs.append(_formDiag.vertex_area(_vKey)) for _vKey in _formDiag.vertex.keys()]
-
-        _flt_Sum_VertexArs  = sum(_fltsL_VertexArs)
-        _flt_AdjFac         = _flt_TtlSWLd / _flt_Sum_VertexArs
-        _vecsL_SWLds        = [[0,0,_flt_VAr * _flt_AdjFac * 1] for _flt_VAr in _fltsL_VertexArs]
-
-    return _vecsL_SWLds;
-
 
 def UpdateFormDiagramVertices (formDiag, coordsL_Vertices, dctMap__Ind_to_VKey):
     _formDiag = formDiag
@@ -55,14 +35,22 @@ def ForceDensitySolver (formData, flt_TtlSWLd, bool_LdsRdistrByTrib = True, iMax
     _dctMap__Ind_to_VKey = _formDiag.index_key()
 
     _coordsL_Vertices, _eKeysL_Edges, _vKeysL_Anchs, _fltsL_Q = CompileForceDensitySolverInputs(_formDiag)
-    _vecsL_TtlLds = CompileForceDensityLoads (_formDiag, flt_TtlSWLd, bool_LdsRdistrByTrib)
-
     
+    #From TNA
+    _vecsL_ApldLds  = _formDiag.get_vertices_attributes(['px', 'py', 'pz'])
+    _vecsA_TtlLds   = array(_vecsL_ApldLds, dtype=float64)
+    _vecsA_ApldLds  = array(_vecsL_ApldLds, dtype=float64)
+    update_loads    = LoadUpdater(_formDiag, _vecsA_ApldLds, thickness=1.0, density=flt_TtlSWLd)
 
     _coordsL_Vertices_0 = deepcopy(_coordsL_Vertices)
     _fltsL_Q_0 = _fltsL_Q
     _i = 0
     while _i < 1:
+
+        _coordsAr_Vertices_0 = array(_coordsL_Vertices_0, dtype=float64)
+        update_loads(_vecsA_TtlLds, _coordsAr_Vertices_0)
+        _vecsL_TtlLds = _vecsA_TtlLds.tolist()
+
         _coordsL_Vertices_1, _fltsL_Q_1, _fltsL_EdgeForces, _fltsL_EdgeLgths, _flt_ResidForces = fd_numpy(_coordsL_Vertices_0, 
                                                                                                             _eKeysL_Edges, 
                                                                                                             _vKeysL_Anchs, 
@@ -86,10 +74,12 @@ def ForceDensitySolver (formData, flt_TtlSWLd, bool_LdsRdistrByTrib = True, iMax
 
         _coordsL_Vertices_0 = _coordsL_Vertices_1
         # _fltsL_Q_0 = _fltsL_Q_1
-        _vecsL_TtlLds = CompileForceDensityLoads (_formDiag, flt_TtlSWLd, bool_LdsRdistrByTrib)
+        # _vecsL_TtlLds = CompileForceDensityLoads (_formDiag, flt_TtlSWLd, bool_LdsRdistrByTrib)
         _i += 1
 
     _formData = _formDiag.to_data()
     
     return _formData, _cDctFDSolvRes;
+
+
 

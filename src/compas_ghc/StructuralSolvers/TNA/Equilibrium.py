@@ -9,10 +9,10 @@ __all__ = [
     'HorizontalEquilibrium_fromData',
     'VerticalEquilibrium_fromZMax_fromData'
 ]
-FormDiagram()
-def VerticalEquilibrium_fromZMax_fromData (formdata, zmax, kmax=100): # *args, **kwargs
+
+def VerticalEquilibrium_fromZMax_fromData (formdata, zmax, kmax=100, density = 1.0): # *args, **kwargs
     form = FormDiagram.from_data(deepcopy(formdata))
-    scale = vertical_from_zmax(form, zmax, kmax)
+    scale = vertical_from_zmax(form, zmax, kmax, density = density)
     return form.to_data(), scale;
 
 
@@ -25,6 +25,7 @@ def HorizontalEquilibrium_fromData (formdata, forcedata, alpha = 100, kmax = 100
     formdata, forcedata = form.to_data(), force.to_data()
 
     return formdata, forcedata
+
 
 # from compas_kmmt.utilities.CodeTimer.CodeTimer import CodeTimer
 # from compas_tna.equilibrium import vertical_from_zmax_rhino

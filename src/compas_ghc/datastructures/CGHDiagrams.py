@@ -30,6 +30,7 @@ class CGHFormDiagram(   CGHDataStructuresBase,
                         FormDiagram):
     def __init__ (self):
         FormDiagram.__init__(self)  
+        self.vec_GblArLd = [0,0,0]
 
     def CompileToStringSummary (self):
         _dct_SmryDta = {    
@@ -39,6 +40,12 @@ class CGHFormDiagram(   CGHDataStructuresBase,
                         }
 
         return _dct_SmryDta
+
+    def CustomAttributesData(self):
+        dct_AddtlDta = {}
+        if hasattr(self,'vec_GblArLd'):
+            dct_AddtlDta = {'vec_GblArLd': self.vec_GblArLd}
+        return dct_AddtlDta
 
     def ToString(self):
         return self._ToString()
