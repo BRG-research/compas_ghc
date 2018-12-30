@@ -9,7 +9,7 @@ __all__ = [
     'HorizontalEquilibrium_fromData',
     'VerticalEquilibrium_fromZMax_fromData'
 ]
-
+FormDiagram()
 def VerticalEquilibrium_fromZMax_fromData (formdata, zmax, kmax=100): # *args, **kwargs
     form = FormDiagram.from_data(deepcopy(formdata))
     scale = vertical_from_zmax(form, zmax, kmax)

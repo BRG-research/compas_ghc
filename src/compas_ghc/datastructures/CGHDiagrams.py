@@ -1,9 +1,13 @@
-from compas_tna.diagrams                            import Diagram
-from compas_tna.diagrams                            import FormDiagram
-from compas_tna.diagrams                            import ForceDiagram
-from compas_ghc.DataStructures.CGHDataTypesBase     import CGHDataStructuresBase
+from compas_tna.diagrams                                                import Diagram
+from compas_tna.diagrams                                                import FormDiagram
+from compas_tna.diagrams                                                import ForceDiagram
+from compas_ghc.DataStructures.CGHDataTypesBase                         import CGHDataStructuresBase
+from compas_ghc.DataStructures.CommonMethods.ElementsMappings           import ElementsMappings
 
-class CGHDiagram(CGHDataStructuresBase, Diagram):
+class CGHDiagram(   CGHDataStructuresBase,
+                    ElementsMappings,
+                    Diagram):
+
     def __init__ (self):
         Diagram.__init__(self)
         # super(CGHDiagram, self).__init__()
@@ -21,7 +25,9 @@ class CGHDiagram(CGHDataStructuresBase, Diagram):
 
 
 
-class CGHFormDiagram(CGHDataStructuresBase, FormDiagram):
+class CGHFormDiagram(   CGHDataStructuresBase, 
+                        ElementsMappings,
+                        FormDiagram):
     def __init__ (self):
         FormDiagram.__init__(self)  
 
@@ -37,7 +43,9 @@ class CGHFormDiagram(CGHDataStructuresBase, FormDiagram):
     def ToString(self):
         return self._ToString()
 
-class CGHForceDiagram(CGHDataStructuresBase, ForceDiagram):
+class CGHForceDiagram(      CGHDataStructuresBase, 
+                            ElementsMappings,
+                            ForceDiagram):
     def __init__ (self):
         ForceDiagram.__init__(self)  
 
