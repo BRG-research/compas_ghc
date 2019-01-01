@@ -1,4 +1,4 @@
-from compas_ghc.Utilities.GenerateStringRepresentation import GenerateStringRepresentation as GnrStrRepr
+from compas_ghc.Utilities.GenerateStringRepresentation                  import GenerateStringRepresentation as GnrStrRepr
 from compas_ghc.DataStructures.CommonMethods.ElementsMappings           import ElementsMappings
 from compas_ghc.DataStructures.CommonMethods.ElementsIdentifiers        import ElementsIdentifiers
 from compas_ghc.DataStructures.CommonMethods.ElementsRetrival           import ElementsRetrival

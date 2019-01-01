@@ -17,9 +17,10 @@ def GenerateStringRepresentation(CGHObj, dct_AddtlInfo = None, str_TitPfx = str_
 			_str_AttrDisp 	+= '{_nm} : {_val}'.format(_nm=_nm, _val=_val) 
 		return _str_AttrDisp;
 
-
-	if isinstance(CGHObj, str):
-		_str_ClsNm 			=  CGHObj
+	if hasattr(CGHObj, 'ToStringClassNameOverride'):
+		_str_ClsNm 			= CGHObj.ToStringClassNameOverride()
+	# if isinstance(CGHObj, str):
+	# 	_str_ClsNm 			=  CGHObj
 	else:
 		_str_ClsNm 			= CGHObj.__class__.__name__
 
@@ -29,20 +30,6 @@ def GenerateStringRepresentation(CGHObj, dct_AddtlInfo = None, str_TitPfx = str_
 	if dct_AddtlInfo is not None:
 		for _nm, _val in dct_AddtlInfo.items():
 			_str_AttrsDisp += '\n'
-
-			# _str_Indt_1		= ' '*_nSpc_1
-			# _txtWrpr_1		= TxtWrpr(  initial_indent = _str_Indt_1,
-			# 							width = 70,
-			# 							subsequent_indent = _str_Indt_1)
-			# _txt_Nm			= _txtWrpr_1.fill(_nm)
-
-			# _str_Indt_2A	= _txt_Nm + ' '*(_nSpc_2 - len(_txt_Nm))
-			# _str_Indt_2B	= ' '*_nSpc_2
-			# _txtWrpr_2		= TxtWrpr(  initial_indent = _str_Indt_2A,
-			# 							width = 70,
-			# 							subsequent_indent = _str_Indt_2B)
-			# _txt_EntrAttr	= _txtWrpr_2.fill(_val)
-
 			_str_AttrsDisp += _DisplayAttribute(_nm, _val)
 	
 	_str_Otp		= _str_Tit + _str_AttrsDisp

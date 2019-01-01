@@ -5,6 +5,16 @@ class ElementsIdentifiers:
         else:
             return self.vertices_on_boundaries();
 
+    def Anchors(self, boolExclExt, bool_Ind = False):
+        _vKeysL_Anchs           = self.vertices_where({'is_fixed':True})
+        if bool_Ind:
+            _dctMap__VKey_to_Ind    = self.VKeyToIndex(boolExclExt = boolExclExt)
+            _vKeysIL_Anchs          = [_dctMap__VKey_to_Ind[_v] for _v in _vKeysL_Anchs]
+            return _vKeysIL_Anchs;
+        else:
+            return _vKeysL_Anchs;
+
+
     def VertexKeys (self, bool_ExclExt = True, bool_Ind = False, dctsL_AddtlVertexCndtns = {}):
         if bool_ExclExt or len(dctsL_AddtlVertexCndtns)>0:
             dctsL_Cndtns = {}
@@ -55,5 +65,5 @@ class ElementsIdentifiers:
             return _vKeysLL_FaceVertices;
         else:
             dctMap__VKey_to_Ind = self.VKeyToIndex(dctsL_AddtlVertexCndtns)
-            return [[dctMap__VKey_to_Ind[_v] for _v in _vKeysLL_FaceVertices[_ind]] for _ind in _fKeyL]
+            return [[dctMap__VKey_to_Ind[_v] for _v in _vKeysLL_FaceVertices[_fKey]] for _fKey in _fKeysL]
     

@@ -5,19 +5,23 @@ try:
     from copy import deepcopy
 except:
     pass
-    
+
 from compas_tna.utilities import LoadUpdater
 from compas_tna.diagrams import FormDiagram
-
+FormDiagram()
 
 def CompileForceDensitySolverInputs (formDiag):
     _formDiag = formDiag
     _dctMap__VKey_to_Ind = _formDiag.key_index()
 
-    _coordsL_Vertices   = _formDiag.get_vertices_attributes('xyz')
-    _eKeysL_Edges       = [(_dctMap__VKey_to_Ind[_eKeyU], _dctMap__VKey_to_Ind[_eKeyV]) for _eKeyU, _eKeyV in _formDiag.edges(False)]
-    _vKeysL_Anchs       = [_dctMap__VKey_to_Ind[_vKey] for _vKey in list(_formDiag.anchors())]
-    _fltsL_Q            = _formDiag.get_edges_attribute('q', 1.0)
+    _coordsL_Vertices   = _formDiag.RetrieveCoordinates(_formDiag.VertexKeys(bool_ExclExt=True))
+    _eKeysL_Edges       = _formDiag.EdgeKeys(bool_ExclExt=True, bool_Ind=True)
+    _vKeysL_Anchs       = _formDiag.Anchors(bool_ExclExt=True)
+    _fltsL_Q            = [float(_v) for _v in _formDiag.get_edges_attribute('q', value=1.0, keys=_eKeysL_Edges)]
+    # _coordsL_Vertices   = _formDiag.get_vertices_attributes('xyz')
+    # _eKeysL_Edges       = [(_dctMap__VKey_to_Ind[_eKeyU], _dctMap__VKey_to_Ind[_eKeyV]) for _eKeyU, _eKeyV in _formDiag.edges(False)]
+    # _vKeysL_Anchs       = [_dctMap__VKey_to_Ind[_vKey] for _vKey in list(_formDiag.anchors())]
+    # _fltsL_Q            = _formDiag.get_edges_attribute('q', 1.0)
 
     return _coordsL_Vertices, _eKeysL_Edges, _vKeysL_Anchs, _fltsL_Q
 
@@ -73,8 +77,6 @@ def ForceDensitySolver (formData, flt_TtlSWLd, bool_LdsRdistrByTrib = True, iMax
             break
 
         _coordsL_Vertices_0 = _coordsL_Vertices_1
-        # _fltsL_Q_0 = _fltsL_Q_1
-        # _vecsL_TtlLds = CompileForceDensityLoads (_formDiag, flt_TtlSWLd, bool_LdsRdistrByTrib)
         _i += 1
 
     _formData = _formDiag.to_data()

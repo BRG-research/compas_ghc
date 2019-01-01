@@ -18,3 +18,18 @@ class RGMeshConversion ():
         _RGMesh.Normals.ComputeNormals()
         _RGMesh.Compact()
         return _RGMesh
+
+    @classmethod
+    def FromRGMesh(cls, RGMesh):
+        _RGMesh                     = RGMesh
+        _cDtaStruct                 = cls()
+
+        _RGPtsL                     = list(_RGMesh.Vertices.ToPoint3dArray())
+        [_cDtaStruct.add_vertex(x=_RGPt.X, y=_RGPt.Y, z=_RGPt.Z) for _RGPt in _RGPtsL]
+
+        for _RGMeshFace in RGMesh.Faces:
+            _vKeysL = []
+            [_vKeysL.append(_vKey) for _vKey in _RGMeshFace if _vKey not in _vKeysL]
+            _cDtaStruct.add_face(_vKeysL)
+
+        return _cDtaStruct;

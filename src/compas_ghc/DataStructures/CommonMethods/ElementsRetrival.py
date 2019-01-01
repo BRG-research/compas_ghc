@@ -86,15 +86,22 @@ class ElementsRetrival:
         _resDct                                 = {}
         _fKeysL_Faces                           = self.FaceKeys(bool_ExclExt)
 
-        if bool_Key:
-            _resDct['keys']                     = _fKeysL_Faces
-        if bool_Ind:   
-            _fIndsL_Faces                       = self.FaceKeys(bool_ExclExt, bool_Ind=True)
-            _resDct['inds']                     = _fIndsL_Faces
+
+
         if bool_DrawRGPts or bool_DrawRGPLns:
             _resDct['RGs']                      = {}
             _vKeysLL_FacesVertices              = self.FaceVerticesKeys(bool_ExclExt)
             
+        if bool_Key:
+            _resDct['keys']                     = {}
+            _resDct['keys'][0]                  = _fKeysL_Faces
+            _resDct['keys'][1]                  = _vKeysLL_FacesVertices
+        if bool_Ind:   
+            _fIndsL_Faces                       = self.FaceKeys(bool_ExclExt, bool_Ind=True)
+            _resDct['inds']                     = {}
+            _resDct['inds'][0]                  = _fIndsL_Faces
+            _resDct['inds'][1]                  = self.FaceVerticesKeys(bool_ExclExt, bool_Ind=True)
+
         if any([bool_Coords, bool_DrawRGPts, bool_DrawRGPLns]):
             _coordsLL_FacesVertices             = self.RetreiveCoordinates(_vKeysLL_FacesVertices)
         if any([bool_Coords_FaceCnts, bool_DrawRGPts_FaceCnts]):
