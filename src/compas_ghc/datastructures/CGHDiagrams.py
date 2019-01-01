@@ -5,7 +5,6 @@ from compas_ghc.DataStructures.CGHDataTypesBase                         import C
 from compas_ghc.DataStructures.CommonMethods.ElementsMappings           import ElementsMappings
 
 class CGHDiagram(   CGHDataStructuresBase,
-                    ElementsMappings,
                     Diagram):
 
     def __init__ (self):
@@ -26,7 +25,6 @@ class CGHDiagram(   CGHDataStructuresBase,
 
 
 class CGHFormDiagram(   CGHDataStructuresBase, 
-                        ElementsMappings,
                         FormDiagram):
     def __init__ (self):
         FormDiagram.__init__(self)  
@@ -51,7 +49,6 @@ class CGHFormDiagram(   CGHDataStructuresBase,
         return self._ToString()
 
 class CGHForceDiagram(      CGHDataStructuresBase, 
-                            ElementsMappings,
                             ForceDiagram):
     def __init__ (self):
         ForceDiagram.__init__(self)  

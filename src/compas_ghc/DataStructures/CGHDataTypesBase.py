@@ -1,4 +1,8 @@
 from compas_ghc.Utilities.GenerateStringRepresentation import GenerateStringRepresentation as GnrStrRepr
+from compas_ghc.DataStructures.CommonMethods.ElementsMappings           import ElementsMappings
+from compas_ghc.DataStructures.CommonMethods.ElementsIdentifiers        import ElementsIdentifiers
+from compas_ghc.DataStructures.CommonMethods.ElementsRetrival           import ElementsRetrival
+from compas_ghc.DataStructures.CommonMethods.RGMeshConversion           import RGMeshConversion
 
 class CGHTypesBase():
     def __init__ (self):
@@ -15,7 +19,11 @@ class CGHTypesBase():
     def _ToString (self):
         return GnrStrRepr(self, self.CompileToStringSummary())
 
-class CGHDataStructuresBase(CGHTypesBase):
+class CGHDataStructuresBase(    CGHTypesBase,
+                                ElementsMappings,
+                                ElementsIdentifiers,
+                                ElementsRetrival,
+                                RGMeshConversion):
     def __init__ (self):
         pass
 
@@ -29,5 +37,4 @@ class CGHDataStructuresBase(CGHTypesBase):
         _cstmAttrDta_Dup    = deepcopy(self.CustomAttributesData())
         for _attrNm, _attrVal in _cstmAttrDta_Dup.items():
             setattr(_dtaStruct_Dup, _attrNm, _attrVal)
-
         return _dtaStruct_Dup;

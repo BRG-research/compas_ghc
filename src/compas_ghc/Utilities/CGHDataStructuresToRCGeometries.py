@@ -1,5 +1,5 @@
 try:
-	import Rhino.Geometry as rg
+	import Rhino.Geometry as RG
 except:
 	pass
 
@@ -19,28 +19,21 @@ def RGMeshToCompasDataStructure (RGMesh, clsInstc = CGHDiagram):
     return _cDtaStruct
 
 def CompasDataStructureToRGMesh (cDtaStruct):
+
     _cDtaStruct = cDtaStruct
     
-    _rgMesh = rg.Mesh()
+    _RGMesh = RG.Mesh()
 
     _vKeysL_Vertices            = sorted(list(_cDtaStruct.vertex.keys()))
     _coordsL_Vertices           = _cDtaStruct.get_vertices_attributes(names=['x','y','z'],keys=_vKeysL_Vertices)
-    [_rgMesh.Vertices.Add(_coords[0],_coords[1],_coords[2]) for _coords in _coordsL_Vertices]
+    [_RGMesh.Vertices.Add(_coords[0],_coords[1],_coords[2]) for _coords in _coordsL_Vertices]
 
     _fKeysL_Faces               = sorted(list(_cDtaStruct.face.keys()))
     _vKeysLL_FacesVertices      = [_cDtaStruct.face[_fKey] for _fKey in _fKeysL_Faces]
-    [_rgMesh.Faces.AddFace(*_vKeysL) for _vKeysL in _vKeysLL_FacesVertices if len(_vKeysL) <= 4]
-    #warn user about unconstructed faces
+    [_RGMesh.Faces.AddFace(*_vKeysL) for _vKeysL in _vKeysLL_FacesVertices if len(_vKeysL) <= 4]
 
-    _rgMesh.Normals.ComputeNormals()
-    _rgMesh.Compact()
+    _RGMesh.Normals.ComputeNormals()
+    _RGMesh.Compact()
 
-    return _rgMesh
-
-def CoordinatesToRGPoint(coords_PtToCvt):
-    return rc.Geometry.Point3d(*coords_PtToCvt); 
-
-def CoordinatesListToRGPointsList(coordsL_PtsToCvt):
-    RGPtsL          	= [rc.Geometry.Point3d(*_coords) for _coords in coordsL_PtsToCvt]
-    return RGPtsL
+    return _RGMesh;
 
