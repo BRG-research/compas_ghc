@@ -6,7 +6,7 @@ class ElementsIdentifiers:
             return self.vertices_on_boundaries();
 
     def Anchors(self, bool_ExclExt, bool_Ind = False):
-        _vKeysL_Anchs           = self.vertices_where({'is_fixed':True})
+        _vKeysL_Anchs           = self.vertices_where({'is_anchor':True})
         if bool_Ind:
             _dctMap__VKey_to_Ind    = self.VKeyToIndex(bool_ExclExt = bool_ExclExt)
             _vKeysIL_Anchs          = [_dctMap__VKey_to_Ind[_v] for _v in _vKeysL_Anchs]
