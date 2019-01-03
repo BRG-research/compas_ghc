@@ -47,11 +47,11 @@ class LoadUpdater(object):
 
     def face_matrix(self):
         face_vertices = [None] * self.mesh.number_of_faces()
-        for fkey in self.mesh.faces():
+        for fkey in self.mesh.fes():
             face_vertices[self.fkey_index[fkey]] = [self.key_index[key] for key in self.mesh.face_vertices(fkey)]
         return face_matrix(face_vertices, rtype='csr', normalize=True)
 
-    def _tributary_areas(self, xyz):
+    def _tributary_areas(self, xyz):ac
         mesh       = self.mesh
         key_index  = self.key_index
         fkey_index = self.fkey_index

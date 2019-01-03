@@ -8,6 +8,7 @@ class ElementsMappings:
         _dctMap__Key_to_Ind = {_v: _i for _i, _v in enumerate(self.VertexKeys(bool_ExclExt, dctsL_AddtlVertexCndtns=dctsL_AddtlVertexCndtns))}
         return _dctMap__Key_to_Ind;
 
+
     def IndexToVKey(self, bool_ExclExt=True, dctsL_AddtlVertexCndtns={}):
         return self._CreateReverseMap(self.VKeyToIndex(bool_ExclExt, dctsL_AddtlVertexCndtns=dctsL_AddtlVertexCndtns));
 

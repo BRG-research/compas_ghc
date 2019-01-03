@@ -2,6 +2,7 @@ from compas_ghc.Utilities.GenerateStringRepresentation                  import G
 from compas_ghc.DataStructures.CommonMethods.ElementsMappings           import ElementsMappings
 from compas_ghc.DataStructures.CommonMethods.ElementsIdentifiers        import ElementsIdentifiers
 from compas_ghc.DataStructures.CommonMethods.ElementsRetrival           import ElementsRetrival
+from compas_ghc.DataStructures.CommonMethods.ElementsAttributes         import AttributesSetters
 from compas_ghc.DataStructures.CommonMethods.RGMeshConversion           import RGMeshConversion
 
 class CGHTypesBase():
@@ -23,6 +24,7 @@ class CGHDataStructuresBase(    CGHTypesBase,
                                 ElementsMappings,
                                 ElementsIdentifiers,
                                 ElementsRetrival,
+                                AttributesSetters,
                                 RGMeshConversion):
     def __init__ (self):
         pass

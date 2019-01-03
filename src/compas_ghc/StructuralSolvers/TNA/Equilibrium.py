@@ -23,13 +23,16 @@ def HorizontalEquilibrium_fromData (formdata, forcedata, alpha = 100, kmax = 100
     horizontal_nodal (form, force, alpha, kmax)
 
     formdata, forcedata = form.to_data(), force.to_data()
-
+    
     return formdata, forcedata
 
+def EvaluateParallisationSuccess (formDiag, ang_Thrld=5):
+    
+    _aL             = formDiag.get_edges_attribute(name='a')
+    _cDctRes        = {}
+    boolsL_APass    = [_a <= ang_Thrld for _a in aL]
+    flt_PCPass      = sum(boolsL_APass) / len(_aL)
+    bool_AllPass    = all(boolsL_APass)
 
-# from compas_kmmt.utilities.CodeTimer.CodeTimer import CodeTimer
-# from compas_tna.equilibrium import vertical_from_zmax_rhino
-# codeTm.Mark('diagram from data')
-# codeTm.Mark('parallelisation')
-# f = XFunc('compas_tna.equilibrium.horizontal_nodal_xfunc', tmpdir=compas_tna.TEMP, callback=callback)
-# codeTm.Mark('diagram to data')
+    _cDctRes    = {'a':_aL, 'aPass':boolsL_APass, 'pcPass':flt_PCPass, 'allPass':bool_AllPass}
+    return bool_AllPass, _cDctRes

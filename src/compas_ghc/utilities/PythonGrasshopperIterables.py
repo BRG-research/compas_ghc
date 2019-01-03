@@ -29,6 +29,20 @@ def NestedListToGrasshopperDataTree (nstdDtaLst, strsL_IterTypExcp=[None], path_
         
     return _UnpackList (nstdDtaLst, path_Init);
 
+def TrimGrasshopperDataTree (GHDtaTr_ToTrm, int_LvlsToTrm):
+    _GHDtaTr = GHDtaTr_ToTrm
+    _dtaTr_Trmd = GH.DataTree[object]()
+    _GHPaths = _GHDtaTr.Paths
+    _dtaLL = _GHDtaTr.Branches
+
+    for _GHPath, _dtaL in zip (_GHPaths, _dtaLL):
+        _intAr_Path     = list(_GHPath.Indices)
+        _len_Path       = len(_intAr_Path)
+        _len_Path_Trmd  = max(_len_Path - int_LvlsToTrm, 1)
+        _GHPath_Trmd = GH_Path(*_intAr_Path[0:_len_Path_Trmd])
+        [_dtaTr_Trmd.Add(_dta, _GHPath_Trmd) for _dta in _dtaL]
+    return _dtaTr_Trmd;
+
 def DictionaryOfListsToGrasshopperDataTree (dtaDct):
     def _GeneratePath (key):
         if isinstance(key, int):
