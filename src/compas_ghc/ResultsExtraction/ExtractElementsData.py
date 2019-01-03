@@ -38,7 +38,7 @@ except:
 # 				_GHDtaTr_Vals.Add(_dtaVal,_GHPath)
 
 # 	return _GHDtaTr_Lgds, _GHDtaTr_Vals;
-get_edges_attributes()
+
 def ExtractElementsData (cDtaStruct, char_ElemTyp, str_FltrByAttrName = None):
 	_str_FltrByAttrName = list(str_FltrByAttrName) if str_FltrByAttrName is not None and isinstance(str_FltrByAttrName,list) else str_FltrByAttrName
 	if char_ElemTyp == 'v': #node

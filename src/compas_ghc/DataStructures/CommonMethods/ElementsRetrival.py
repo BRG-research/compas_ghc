@@ -38,7 +38,7 @@ class ElementsRetrival:
 
     def _BreakdownData (self, dtaDct, bool_RtnDtaLL, strsL_AttrNms):
         _dtaDct = dtaDct
-        if len(strsL_AttrNms)>0 and bool_RtnDtaLL == True:
+        if strsL_AttrNms is not None and len(strsL_AttrNms)>0 and bool_RtnDtaLL == True:
             _nElems = len(dtaDct.keys())
             _nAttrs = len(strsL_AttrNms)
             _dtaLL  = [[None for __iElem in range(0, _nElems)] for __iAttr in range(0, _nAttrs)]
