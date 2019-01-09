@@ -16,6 +16,7 @@ class ElementsAttributesModificationInstructions(CGHTypesBase):
 
     def ToStringClassNameOverride(self):
         return 'CGHElementsAttributesModifier';
+        
     def ToString(self):
         return self._ToString()
 

@@ -17,7 +17,6 @@ def UpdateFormDiagramVertices (formDiag, coordsL_Vertices, dctMap__Ind_to_VKey):
         _formDiag.vertex[_vKey]['x'] = coordsL_Vertices[_i][0]
         _formDiag.vertex[_vKey]['y'] = coordsL_Vertices[_i][1]
         _formDiag.vertex[_vKey]['z'] = coordsL_Vertices[_i][2]
-    # return formDiag;
 
 def ForceDensitySolver (formData, flt_TtlSWLd, bool_LdsRdistrByTrib = True, iMax_LdsRedistr = 5):
     _formDiag = FormDiagram.from_data(formData)
@@ -59,7 +58,6 @@ def ForceDensitySolver (formData, flt_TtlSWLd, bool_LdsRdistrByTrib = True, iMax
 
         UpdateFormDiagramVertices (_formDiag, _coordsL_Vertices_1, _dctMap__Ind_to_VKey)
 
-        #Add Solve Results
         _cDctFDRes = {          'lds':          _vecsL_TtlLds,
                                 'coords':     _coordsL_Vertices_1,
                                 'q':            _fltsL_Q_1,
@@ -72,20 +70,19 @@ def ForceDensitySolver (formData, flt_TtlSWLd, bool_LdsRdistrByTrib = True, iMax
 
         if bool_LdsRdistrByTrib == False:
             break
-        elif _i >= iMax_LdsRedistr - 1: #or if changes fall below threshold
+        elif _i >= iMax_LdsRedistr - 1: 
             break
 
         _coordsL_Vertices_0 = _coordsL_Vertices_1
         _i += 1
 
-    _i_FnlIter = max(list(_cDctStructSolvOprDta['res']['all'].keys()))
+    _i_FnlIter = max(list(_cDctStructSolvOprDta['res']['all'].keys())) 
     _formDiag.SetEdgesAttributeWithValues(str_AttrNm='f',dtaL_AttrVals=_cDctStructSolvOprDta['res']['all'][_i_FnlIter]['f'],eKeysL=_eKeysL_Edges)
     _formDiag.SetEdgesAttributeWithValues(str_AttrNm='q',dtaL_AttrVals=_cDctStructSolvOprDta['res']['all'][_i_FnlIter]['q'], eKeysL=_eKeysL_Edges)
     _formDiag.SetEdgesAttributeWithValues(str_AttrNm='l',dtaL_AttrVals=_cDctStructSolvOprDta['res']['all'][_i_FnlIter]['lgths'], eKeysL=_eKeysL_Edges)
-    _formDiag.SetVerticesAttributeWithValues(str_AttrNm='p',dtaL_AttrVals=_cDctStructSolvOprDta['res']['all'][_i_FnlIter]['lds'], vKeysL=_vKeysL_Vertices)
+    _formDiag.SetVerticesAttributesWithValues(strsL_AttrsNms=['px','py','pz'],dtaLL_AttrsVals=_cDctStructSolvOprDta['res']['all'][_i_FnlIter]['lds'], vKeysL=_vKeysL_Vertices)
     _formDiag.SetVerticesAttributeWithValues(str_AttrNm='fR',dtaL_AttrVals=_cDctStructSolvOprDta['res']['all'][_i_FnlIter]['fResid'], vKeysL=_vKeysL_Vertices)
 
     _formData = _formDiag.to_data()
     return _formData, _cDctStructSolvOprDta;
-
 

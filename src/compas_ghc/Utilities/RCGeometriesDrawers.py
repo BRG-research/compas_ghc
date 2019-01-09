@@ -7,7 +7,8 @@ except:
 class RGPointDrawers:
     @staticmethod
     def CoordinatesToRGPoint(coords_PtToDw):
-        return RC.Geometry.Point3d(*coords_PtToDw); 
+        if coords_PtToDw is not None:
+            return RC.Geometry.Point3d(*coords_PtToDw); 
 
     @staticmethod
     def CoordinatesListToRGPointsList(coordsL_PtsToDw):

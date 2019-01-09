@@ -11,9 +11,11 @@ def ImplementElementsModifications (formDiag, instsElemsAttrsModL):
 
 		if len(_keysL_ElemsToMod) == 0:
 			if _char_ElemsTyp == 'v':
-				_keysL_AllDiagElems = _formDiag.VertexKeys()
+				_keysL_AllDiagElems 	= _formDiag.VertexKeys()
+				# _dctMap__VInd_to_VKey 	= _formDiag.IndexToVKey()
 			elif _char_ElemsTyp == 'e':
-				_keysL_AllDiagElems = _formDiag.EdgeKeys()
+				_keysL_AllDiagElems 	= _formDiag.EdgeKeys()
+				# _dctMap__VInd_to_VKey 	= _formDiag.EIndKeysToEKeys()
 			_keysL_ElemsToMod	= _keysL_AllDiagElems
 
 		_dta_AttrVal 	= [_instsElemsAttrsMod.dta_AttrVal] 

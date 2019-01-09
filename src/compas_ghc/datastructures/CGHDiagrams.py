@@ -13,9 +13,9 @@ class CGHDiagram(   CGHDataStructuresBase,
 
     def CompileToStringSummary (self):
         _dct_SmryDta = {    
-                            '# of Nodes'    : len(self.vertex),
-                            '# of Members'  : len(self.edgedata),
-                            '# of Spaces'   : len(self.face),
+                            '# of Nodes'    : self.number_of_vertices(),
+                            '# of Members'  : self.number_of_edges(),
+                            '# of Spaces'   : self.number_of_faces(),
                         }
         return _dct_SmryDta
 
@@ -32,12 +32,12 @@ class CGHFormDiagram(   CGHDataStructuresBase,
 
     def CompileToStringSummary (self):
         _dct_SmryDta = {    
-                            '# of Nodes'    : len(self.vertex),
-                            '# of Members'  : len(self.edgedata),
-                            '# of Spaces'   : len(self.face),
+                            '# of Nodes'    : self.number_of_vertices(),
+                            '# of Members'  : self.number_of_edges(),
+                            '# of Spaces'   : self.number_of_faces(),
                         }
-
         return _dct_SmryDta
+
 
     def CustomAttributesData(self):
         dct_AddtlDta = {}
@@ -55,9 +55,9 @@ class CGHForceDiagram(      CGHDataStructuresBase,
 
     def CompileToStringSummary (self):
         _dct_SmryDta = {    
-                            '# of Space Vertices'       : len(self.vertex),
-                            '# of Members'              : len(self.edgedata),
-                            '# of Node Faces'           : len(self.face),
+                            '# of Space Vertices'       : self.number_of_vertices(),
+                            '# of Members'              : self.number_of_edges(),
+                            '# of Node Faces'           : self.number_of_faces(),
                         }
         return _dct_SmryDta
 

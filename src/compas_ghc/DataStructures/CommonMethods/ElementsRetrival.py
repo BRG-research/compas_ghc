@@ -53,19 +53,25 @@ class ElementsRetrival:
         else:
             return dtaDct
 
-    def RetrieveVertexData (self, bool_ExclExt = True, strsL_AttrNms = None, bool_RtnDtaLL = False):
+    def RetrieveVertexData (self, bool_ExclExt = True, strsL_AttrNms = None, bool_RtnDtaLL = False, bool_RtnKeysLst=False):
         _vKeysL = self.VertexKeys(bool_ExclExt=bool_ExclExt)
         _dtaDct = OrderedDict([(_v, _a) for _v, _a in self.vertex.items() if _v in _vKeysL])
         self._FilterDictionaryByAttributes(_dtaDct, strsL_AttrNms)
         _dtaFnl = self._BreakdownData(_dtaDct, bool_RtnDtaLL, strsL_AttrNms)
-        return _dtaFnl;
+        if not bool_RtnKeysLst:
+            return _dtaFnl;
+        else:
+            return _dtaFnl, _vKeysL
 
-    def RetrieveEdgeData (self, bool_ExclExt = True, bool_RtnDtaLL = False, strsL_AttrNms = None):
+    def RetrieveEdgeData (self, bool_ExclExt = True, bool_RtnDtaLL = False, strsL_AttrNms = None, bool_RtnKeysLst=False):
         _eKeysL = self.EdgeKeys(bool_ExclExt=bool_ExclExt)
         _dtaDct = OrderedDict([((_u, _v), _a) for _u, _v, _a in self.edges(True) if (_u, _v) in _eKeysL])
         self._FilterDictionaryByAttributes(_dtaDct, strsL_AttrNms)
         _dtaFnl = self._BreakdownData(_dtaDct, bool_RtnDtaLL, strsL_AttrNms)
-        return _dtaFnl;
+        if not bool_RtnKeysLst:
+            return _dtaFnl;
+        else:
+            return _dtaFnl, _eKeysL
 
     def RetrieveFaceData (self, bool_ExclExt = True, strsL_AttrNms = None):
         _fKeysL = self.FaceKeys(bool_ExclExt=bool_ExclExt)

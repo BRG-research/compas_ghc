@@ -64,3 +64,11 @@ class ElementsIdentifiers:
             dctMap__VKey_to_Ind = self.VKeyToIndex(dctsL_AddtlVertexCndtns)
             return [[dctMap__VKey_to_Ind[_v] for _v in _vKeysLL_FaceVertices[_fKey]] for _fKey in _fKeysL]
     
+    def VertexWithMaxDegree (self):
+
+        if not self.vertex:
+            return 0
+        _degVKeyPair     = sorted([(self.vertex_degree(key),key) for key in self.vertices()])
+        _degVKeyPair    = _degVKeyPair[::-1]
+        _degMax, _vKey  = _degVKeyPair[0][1], _degVKeyPair[0][0]
+        return _degMax, _vKey
