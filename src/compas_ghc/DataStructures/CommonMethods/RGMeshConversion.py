@@ -4,6 +4,7 @@ try:
 except:
     pass
 
+
 class RGMeshConversion ():
     def ToRGMesh(self, bool_ExclExt=True):
         _RGMesh = RC.Geometry.Mesh()
