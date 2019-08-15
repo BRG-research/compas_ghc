@@ -8,7 +8,7 @@ import collections
 
 
 
-def NestedListToGrasshopperDataTree (nstdDtaLst, strsL_IterTypExcp=[None], path_Init = None):
+def list_to_tree (nstdDtaLst, strsL_IterTypExcp=[None], path_Init = None):
     path_Init = GH_Path(0) if path_Init is None else path_Init
     def _UnpackList (_nstdDtaLst, _path):
         _dtaTr = DataTree[object]()
@@ -24,6 +24,16 @@ def NestedListToGrasshopperDataTree (nstdDtaLst, strsL_IterTypExcp=[None], path_
         
     return _UnpackList (nstdDtaLst, path_Init);
 
+def tree_to_list (aTree):
+    theList = []
+    for i in range(aTree.BranchCount ):
+        thisListPart = []
+        thisBranch = aTree.Branch(i)
+        for j in range(len(thisBranch)):
+            thisListPart.append( thisBranch[j] )
+        theList.append(thisListPart)
+    return theList
+
 def trim_tree (datatree, deg = 1):
     paths = datatree.Paths
     datacounts = datatree.DataCount
@@ -35,3 +45,4 @@ def trim_tree (datatree, deg = 1):
             datatree_new.Add(_data, _path_new)
     return datatree_new           
 
+from compas_ghc.conversion.gh_datatree import list_to_tree
